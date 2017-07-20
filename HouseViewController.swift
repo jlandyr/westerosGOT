@@ -10,26 +10,47 @@ import UIKit
 
 class HouseViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet weak var labelHouseName: UILabel!
+    @IBOutlet weak var labelWords: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    
+    let model: House
+    init(model:House) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+        self.title = model.name
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //implementar este método cuando se crea super.init(nibName: nil, bundle: nil)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init coder not initialized")
     }
-    */
-
+    
+    func syncViewWithModel(){
+        //model -> view
+        self.labelHouseName.text = "House: \(self.model.name)"
+        self.image.image = self.model.sigil.image
+        self.labelWords.text = self.model.name
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        syncViewWithModel()
+        setupUI()
+    }
+    
+    func setupUI() {
+        //creamos UIBarButtonItem
+        let buttonWiki = UIBarButtonItem(title: "Wiki", style: .plain, target: self, action:#selector(displayWiki))
+        
+        //añadimos UIBarButtonItem al UINavigation
+        navigationItem.rightBarButtonItem = buttonWiki
+    }
+    
+    func displayWiki(){
+        let wikiVC = WikiViewController(model: model)
+        navigationController?.pushViewController(wikiVC, animated: true)
+        //el ? en navigationController indica: si la vista actual tiene un navigation entonces ejecuta el método pushViewController
+    }
 }

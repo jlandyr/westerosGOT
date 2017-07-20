@@ -19,11 +19,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //1. Creamos window
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.backgroundColor = UIColor.blue
+        window?.backgroundColor = UIColor.cyan
         
         //2. Creamos RootViewController
-        let rootVC = UIViewController()
-        window?.rootViewController = rootVC
+//        let rootVC = UIViewController()
+//        window?.rootViewController = rootVC
+//        return true
+        
+        
+        //2. Creamos modelo
+        let houses = Repository.local.houses
+        
+        //3. Creamos controlador
+        var controllers = [UIViewController]()
+        for house in houses{
+            controllers.append(HouseViewController(model: house).wrappedInNavigation())
+        }
+        
+        //4. Creamos UINavigation
+//        let starkNav = UINavigationController(rootViewController: starkVC)
+//        let lannisterNav = UINavigationController(rootViewController: lannisterVC)
+        
+        
+        //5. Creamos UITabBar
+        let tabVC = UITabBarController()
+        tabVC.viewControllers = controllers
+        
+        //Creamos tableView
+        
+        
+        //6. Asignamos el RootVC
+        window?.rootViewController = tabVC
+        
         return true
     }
 

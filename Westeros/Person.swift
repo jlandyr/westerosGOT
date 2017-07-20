@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Character{
+final class Person{
     let name : String
     let house: House
     private let _alias: String?
@@ -30,11 +30,35 @@ final class Character{
     }
     
     //como alias es optional, swift permite crear los inicializadores que nos convengan
-    init(name:String, alias:String, house:House) {
+    init(name:String, alias:String?, house:House) {
         (self.name, _alias ,self.house) = (name,alias,house)
     }
     
-    init(name:String, house:House) {
-        (self.name ,self.house) = (name,house)
+    convenience init(name:String, house:House) {
+        self.init(name: name, alias: nil, house: house)
+    }
+}
+
+extension Person{
+    var fullName : String{
+        return "\(name) \(house.name)"
+    }
+}
+extension Person{
+    var proxy : String{
+        return "\(name) \(alias) \(house.name)"
+    }
+}
+extension Person:Hashable {
+    var hashValue : Int{
+        get {
+            return proxy.hashValue
+            
+        }
+    }
+}
+extension Person:Equatable{
+    static func == (lhs: Person, rhs:Person) -> Bool{
+        return lhs.proxy == rhs.proxy
     }
 }
