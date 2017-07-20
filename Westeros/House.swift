@@ -65,6 +65,13 @@ extension House{
             add(person: person)
         }
     }
+    
+    //Sorted [Person]
+    func sortedMembers() -> [Person]{
+        return _members.sorted()
+//        let memberArray : [Person] = Array(_members)
+//        return memberArray.sorted()
+    }
 }
 extension House{
     var proxyForEquality : String{

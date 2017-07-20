@@ -21,33 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.cyan
         
-        //2. Creamos RootViewController
-//        let rootVC = UIViewController()
-//        window?.rootViewController = rootVC
-//        return true
-        
-        
         //2. Creamos modelo
         let houses = Repository.local.houses
         
-        //3. Creamos controlador
-        var controllers = [UIViewController]()
-        for house in houses{
-            controllers.append(HouseViewController(model: house).wrappedInNavigation())
-        }
+        //3. Creamos UITableViewController
+        let housesVC = HousesViewController(model: houses).wrappedInNavigation()
         
-        //4. Creamos UINavigation
-//        let starkNav = UINavigationController(rootViewController: starkVC)
-//        let lannisterNav = UINavigationController(rootViewController: lannisterVC)
-        
-        
-        //5. Creamos UITabBar
-        let tabVC = UITabBarController()
-        tabVC.viewControllers = controllers
-        
-        
-        //6. Asignamos el RootVC
-        window?.rootViewController = tabVC
+        //4. Asignamos el RootVC
+        window?.rootViewController = housesVC
         
         return true
     }

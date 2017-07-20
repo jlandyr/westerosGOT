@@ -22,7 +22,7 @@ class HousesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Westeros"
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +30,7 @@ class HousesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // MARK: - UITableView
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -50,6 +50,12 @@ class HousesViewController: UITableViewController {
         cell?.imageView?.image = house.sigil.image
         cell?.textLabel?.text = house.name
         return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let house = model[indexPath.row]
+        let houseVC = HouseViewController(model: house)
+        navigationController?.pushViewController(houseVC, animated: true)
     }
         
 }
