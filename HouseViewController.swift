@@ -43,14 +43,19 @@ class HouseViewController: UIViewController {
     func setupUI() {
         //creamos UIBarButtonItem
         let buttonWiki = UIBarButtonItem(title: "Wiki", style: .plain, target: self, action:#selector(displayWiki))
-        
+        let buttonMembers = UIBarButtonItem(title: "Members", style: .plain, target: self, action:#selector(displayMembers))
         //añadimos UIBarButtonItem al UINavigation
-        navigationItem.rightBarButtonItem = buttonWiki
+        navigationItem.rightBarButtonItems = [buttonWiki, buttonMembers]
     }
     
     func displayWiki(){
         let wikiVC = WikiViewController(model: model)
         navigationController?.pushViewController(wikiVC, animated: true)
         //el ? en navigationController indica: si la vista actual tiene un navigation entonces ejecuta el método pushViewController
+    }
+    
+    func displayMembers(){
+        let membersVC = MembersTableViewController(model: model.sortedMembers())
+        navigationController?.pushViewController(membersVC, animated: true)
     }
 }

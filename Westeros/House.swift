@@ -69,8 +69,7 @@ extension House{
     //Sorted [Person]
     func sortedMembers() -> [Person]{
         return _members.sorted()
-//        let memberArray : [Person] = Array(_members)
-//        return memberArray.sorted()
+       //sorted funciona porque implementamos el método Equatable en Person.swift
     }
 }
 extension House{

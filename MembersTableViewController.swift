@@ -1,5 +1,5 @@
 //
-//  HousesViewController.swift
+//  MembersTableViewController.swift
 //  Westeros
 //
 //  Created by Bamby on 20/7/17.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class HousesViewController: UITableViewController {
+class MembersTableViewController: UITableViewController {
     
-    let model: [House]
-    init(model:[House]) {
+    let model: [Person]
+    init(model:[Person]) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -19,10 +19,12 @@ class HousesViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder): has not been implemented")
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Westeros"
+
+        self.title = "Members"
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,36 +32,30 @@ class HousesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - UITableView
+    // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         return model.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellID = "HouseCell"
-        let house = model[indexPath.row]
+        let cellID = "MemberCell"
+        let member = model[indexPath.row]
         var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         
         if cell == nil{
             cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
         }
-        cell?.imageView?.image = house.sigil.image
-        cell?.textLabel?.text = house.name
+        
+        cell?.textLabel?.text = member.fullName
         return cell!
     }
+
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let house = model[indexPath.row]
-        let houseVC = HouseViewController(model: house)
-        for member in house.sortedMembers()
-        {
-            print(member.name)
-        }
-        navigationController?.pushViewController(houseVC, animated: true)
-    }
-        
 }
