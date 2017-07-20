@@ -45,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabVC = UITabBarController()
         tabVC.viewControllers = controllers
         
-        //Creamos tableView
-        
         
         //6. Asignamos el RootVC
         window?.rootViewController = tabVC
