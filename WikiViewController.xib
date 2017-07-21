@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,20 +21,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3a-iJ-Akc">
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3a-iJ-Akc">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="7dN-HW-Ady"/>
                     </connections>
                 </webView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9q7-tR-0rC">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9q7-tR-0rC">
                     <rect key="frame" x="177" y="323" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9q7-tR-0rC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="95C-Xp-k7n"/>
+                <constraint firstAttribute="bottom" secondItem="N3a-iJ-Akc" secondAttribute="bottom" id="I8d-3J-vHe"/>
+                <constraint firstItem="9q7-tR-0rC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="U2o-wG-eE9"/>
+                <constraint firstAttribute="trailing" secondItem="N3a-iJ-Akc" secondAttribute="trailing" id="Zne-06-9Fx"/>
+                <constraint firstItem="N3a-iJ-Akc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="j7i-Ta-b8r"/>
+                <constraint firstItem="N3a-iJ-Akc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kXb-RH-CsX"/>
+            </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
