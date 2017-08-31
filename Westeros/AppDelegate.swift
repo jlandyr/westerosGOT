@@ -17,23 +17,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //1. Creamos window
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        window?.makeKeyAndVisible()
+//        window?.backgroundColor = UIColor.cyan
+//        
+//        //2. Creamos modelo
+//        let houses = Repository.local.houses
+//        
+//        //3. Creamos UITableViewController
+//        let dataSources = DataSources.houseDataSource(model: houses)
+//        let delegate = Delegates.housesDelegate(model: houses)
+//        let housesVC = ArrayTableViewController(dataSource: dataSources,
+//                                                delegate: delegate,
+//                                                title: "Westeros",
+//                                                style: .plain).wrappedInNavigation()
+//        
+//        //4. Asignamos el RootVC
+//        window?.rootViewController = housesVC
+        
+        
+        //models
+        let housesModel = Repository.local.houses
+        let seasonsModel = Repository.local.seasons
+        
+        //UINavigationController
+        let housesVC = UINavigationController(rootViewController: HousesViewController(model: housesModel))
+        let seasonsVC = UINavigationController(rootViewController:SeasonsTableViewController(model: seasonsModel))
+        
+        // RootVC
+        let tabVC = UITabBarController()
+        tabVC.viewControllers = [housesVC, seasonsVC]
+        
+        //window
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = tabVC
+        window?.backgroundColor = UIColor.orange
         window?.makeKeyAndVisible()
-        window?.backgroundColor = UIColor.cyan
         
-        //2. Creamos modelo
-        let houses = Repository.local.houses
-        
-        //3. Creamos UITableViewController
-        let dataSources = DataSources.houseDataSource(model: houses)
-        let delegate = Delegates.housesDelegate(model: houses)
-        let housesVC = ArrayTableViewController(dataSource: dataSources,
-                                                delegate: delegate,
-                                                title: "Westeros",
-                                                style: .plain).wrappedInNavigation()
-        
-        //4. Asignamos el RootVC
-        window?.rootViewController = housesVC
         
         return true
     }

@@ -18,7 +18,8 @@ protocol HouseFactory {
     var houses: [House] {get}
     func house(named:String)->House?
     func houses(filteredBy:Filter) -> [House]
-    
+    var seasons: [Season] {get}
+    func season(named:String) -> Season?
 }
 
 final class LocalFactory:HouseFactory{
@@ -26,6 +27,44 @@ final class LocalFactory:HouseFactory{
     func houses(filteredBy: Filter) -> [House]{
         let filtered = Repository.local.houses.filter(filteredBy)
         return filtered
+    }
+    
+    func seasons(filteredBy:(Season)-> Bool) -> [Season]{
+        return Repository.local.seasons.filter(filteredBy)
+    }
+    
+    var seasons: [Season]{
+        get {
+            let season1 = Season(name: "name season 1", episodesNumber: 0, releaseDate: Date())
+            let season2 = Season(name: "name season 2", episodesNumber: 0, releaseDate: Date())
+            let season3 = Season(name: "name season 3", episodesNumber: 0, releaseDate: Date())
+            let season4 = Season(name: "name season 4", episodesNumber: 0, releaseDate: Date())
+            
+            season1.add(episode: Episode(title: "episode 1, season 1", broadcastDate: Date(), season: season1))
+            season1.add(episode: Episode(title: "episode 2, season 1", broadcastDate: Date(), season: season1))
+            season1.add(episode: Episode(title: "episode 3, season 1", broadcastDate: Date(), season: season1))
+            season1.add(episode: Episode(title: "episode 4, season 1", broadcastDate: Date(), season: season1))
+            
+            season2.add(episode: Episode(title: "episode 1, season 2", broadcastDate: Date(), season: season2))
+            season2.add(episode: Episode(title: "episode 2, season 2", broadcastDate: Date(), season: season2))
+            season2.add(episode: Episode(title: "episode 3, season 2", broadcastDate: Date(), season: season2))
+            
+            season3.add(episode: Episode(title: "episode 1, season 3", broadcastDate: Date(), season: season3))
+            season3.add(episode: Episode(title: "episode 2, season 3", broadcastDate: Date(), season: season3))
+            season3.add(episode: Episode(title: "episode 3, season 3", broadcastDate: Date(), season: season3))
+            season3.add(episode: Episode(title: "episode 4, season 3", broadcastDate: Date(), season: season3))
+            season3.add(episode: Episode(title: "episode 5, season 3", broadcastDate: Date(), season: season3))
+            
+            season4.add(episode: Episode(title: "episode 1, season 4", broadcastDate: Date(), season: season4))
+            season4.add(episode: Episode(title: "episode 2, season 4", broadcastDate: Date(), season: season4))
+            season4.add(episode: Episode(title: "episode 3, season 4", broadcastDate: Date(), season: season4))
+            season4.add(episode: Episode(title: "episode 4, season 4", broadcastDate: Date(), season: season4))
+            season4.add(episode: Episode(title: "episode 5, season 4", broadcastDate: Date(), season: season4))
+            season4.add(episode: Episode(title: "episode 6, season 4", broadcastDate: Date(), season: season4))
+            
+            return Array([season1,season2, season3, season4].sorted().prefix(6))
+//            return [season1,season2, season3, season4].sorted()
+        }
     }
     
     var houses: [House]{
@@ -61,6 +100,11 @@ final class LocalFactory:HouseFactory{
     func house(named:String) -> House? {
         let house = houses.filter{$0.name.uppercased() == named.uppercased()}.first
         return house
+    }
+    
+    func season(named:String) -> Season?{
+        let season = seasons.filter{$0.name.uppercased() == named.uppercased()}.first
+        return season
     }
 }
 

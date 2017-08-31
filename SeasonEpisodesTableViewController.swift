@@ -1,17 +1,17 @@
 //
-//  HousesViewController.swift
+//  SeasonEpisodesTableViewController.swift
 //  Westeros
 //
-//  Created by Bamby on 20/7/17.
+//  Created by Bamby on 31/8/17.
 //  Copyright © 2017 eureka apps. All rights reserved.
 //
 
 import UIKit
 
-class HousesViewController: UITableViewController {
-    
-    let model: [House]
-    init(model:[House]) {
+class SeasonEpisodesTableViewController: UITableViewController {
+        
+    let model: [Episode]
+    init(model:[Episode]) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -20,47 +20,47 @@ class HousesViewController: UITableViewController {
         fatalError("init(coder): has not been implemented")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Westeros"
+        
+        self.title = "Episodes"
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - UITableView
+    
+    // MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         return model.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellID = "HouseCell"
-        let house = model[indexPath.row]
+        let cellID = "EpisodesCell"
+        let member = model[indexPath.row]
         var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         
         if cell == nil{
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         }
-        cell?.imageView?.image = house.sigil.image
-        cell?.textLabel?.text = house.name
+        
+        cell?.textLabel?.text = member.title
+        cell?.detailTextLabel?.text = "broadcast: \(member.broadcastDate)"
         return cell!
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let house = model[indexPath.row]
-        
-        let houseVC = HouseViewController(model: house)
-        for member in house.sortedMembers()
-        {
-            print(member.name)
-        }
-        navigationController?.pushViewController(houseVC, animated: true)
+        let episode = model[indexPath.row]
+        let episodeVC = EpisodeViewController(model: episode)
+        navigationController?.pushViewController(episodeVC, animated: true)
     }
-        
+    
 }
